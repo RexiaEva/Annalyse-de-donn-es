@@ -1,4 +1,4 @@
-import pandas as pd 
+import pandas as pd
 import numpy as np
 import mysql.connector
 
@@ -68,20 +68,13 @@ def main():
 
     liste_NOC = df2[["NOC", "region", "notes"]]
     liste_NOC = liste_NOC.fillna("nan")
+
     liste_NOC = liste_to_tuple(liste_NOC)
-
-    liste_equipes = df[["Team","NOC"]]
-    # Retrait des valeurs SGP pour la colonne NOC des athlètes (elles n'ont pas de contrepartie dans la bdd NOC).
-    liste_equipes = liste_equipes.drop(liste_equipes[liste_equipes["NOC"] == "SGP"].index)
-
-    print("yo", type(liste_equipes))
-    liste_equipes = liste_to_tuple(liste_equipes)
-    # Destruction des doublons grâce à un passage par le type set
-    liste_equipes = list(set(liste_equipes))
-    print("yo", len(liste_equipes))
+    liste_NOC = list(set(liste_NOC))
 
     # Remplissage nocs :
-    slices_nocs = slicer(liste_NOC, 0.2)
+    print("la liste de noc", liste_NOC)
+    slices_nocs = slicer(liste_NOC, 0.5)
 
     print("taille slices NOC :", len(slices_nocs))
 
@@ -90,6 +83,21 @@ def main():
         connexion.inserer_nocs_base(i)
     
     # Remplissage table équipes :
+
+    liste_equipes = df[["Team","NOC"]]
+    # Retrait des valeurs SGP pour la colonne NOC des athlètes (elles n'ont pas de contrepartie dans la bdd NOC).
+    liste_equipes = liste_equipes.drop(liste_equipes[liste_equipes["NOC"] == "SGP"].index)
+
+    print("yo", type(liste_equipes))
+    liste_equipes = liste_to_tuple(liste_equipes)
+    liste_equipes = list(set(liste_equipes))
+
+    # Destruction des doublons grâce à un passage par le type set
+    #TENTER AVEC UN PANDAS UNIQUE
+    #liste_equipes = list(set(liste_equipes))
+
+    print("yo", len(liste_equipes))
+
     slices_teams = slicer(liste_equipes, 0.2)
     print("taille slices team :", len(slices_teams))
 
@@ -109,9 +117,10 @@ def main():
 
     # Remplissage table jeux :
     liste_jeux = df[["Games","Year", "Season", "City"]]
+
     liste_jeux = liste_to_tuple(liste_jeux)
     liste_jeux = list(set(liste_jeux))
-    
+
     slices_jeux = slicer(liste_jeux, 0.2)
     
     for i in slices_jeux :
