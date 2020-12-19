@@ -55,8 +55,24 @@ class Base_donnee():
 
     def inserer_equipes_base(self, var):
         """
-        docstring
+        Insertion des équipes en base.
         """
         sql = "INSERT INTO equipes (id_equipe, nom, id_noc) VALUES (NULL, %s, (SELECT nocs.id_noc FROM nocs WHERE nocs.noc =%s));"
+        self.curseur.executemany(sql, var)
+        self.conn.commit()
+
+    def inserer_athletes_base(self, var):
+        """
+        Insertion des athlètes en base.
+        """
+        sql = "INSERT INTO athletes (id_athlete, nom, sexe) VALUES (%s, %s, %s);"
+        self.curseur.executemany(sql, var)
+        self.conn.commit()
+
+    def inserer_jeux_base(self, var):
+        """
+        Insertion des jeux en base.
+        """
+        sql = "INSERT INTO jeux (id_jeu, jeu, annee, saison, ville) VALUES (NULL, %s, %s, %s, %s);"
         self.curseur.executemany(sql, var)
         self.conn.commit()

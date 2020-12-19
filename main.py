@@ -10,6 +10,48 @@ def main():
     connexion.gen_connexion()
     connexion.creer_curseur()
 
+    def slicer (liste, pourcentage):
+        """
+        Cette fonction découpe une liste A en liste B nestée
+        remplie de petits bouts issus de la liste A. Le pourcentage
+        de 0 à 1
+        correspondra à la taille des listes nestées dans le resultat.
+        
+        Par exemple, 0.5 donnera une liste nestée contenant deux slices,
+        0.1 donnera des slices d'une taille de 10% de la liste A, etc.
+        """
+
+        # Gestion du cas où l'on rentrerait 0 au lieu d'une taille valide de slice.
+        if pourcentage == 0:
+            pourcentage +=1
+            print("Le pourcentage ne doit pas être nul. Pourcentage repassé à 1.")
+        
+        resultat = []
+        taille_liste = len(liste)
+
+        taille_slices = taille_liste * pourcentage
+        
+        # variable qui fait la navette entre la liste d'éléments et la liste de listes nestées pour la charger :
+        navette = []
+        i = 0
+
+        while i < taille_liste:
+
+            # Si groupe pas fini, on lui ajoute l'élément de rang i et on incrémente i.
+            if len(navette) < taille_slices:
+                navette.append(liste[i])
+                i+=1
+
+            # Si groupe a atteint la taille visée, on l'ajoute à la liste de groupes et on le vide.
+            else:
+                resultat.append(navette)
+                navette = []
+
+        # Ajout d'un éventuel dernier groupe réduit (+ rapide sans condition pour tester si un tel groupe existe).
+        resultat.append(navette)
+
+        return resultat
+
     def liste_to_tuple(df):
         print("1 :",len(df))
         df = np.array(df)
@@ -24,71 +66,57 @@ def main():
     df2 = pd.read_csv("./data/noc_regions.csv")
     # merged = pd.merge(df, df2, on='NOC', how="left")
 
-    NOC = df2[["NOC", "region", "notes"]]
-    NOC = NOC.fillna("nan")
-    NOC = liste_to_tuple(NOC)
+    liste_NOC = df2[["NOC", "region", "notes"]]
+    liste_NOC = liste_NOC.fillna("nan")
+    liste_NOC = liste_to_tuple(liste_NOC)
 
-    Team = df[["Team","NOC"]]
+    liste_equipes = df[["Team","NOC"]]
     # Retrait des valeurs SGP pour la colonne NOC des athlètes (elles n'ont pas de contrepartie dans la bdd NOC).
-    Team = Team.drop(Team[Team["NOC"] == "SGP"].index)
+    liste_equipes = liste_equipes.drop(liste_equipes[liste_equipes["NOC"] == "SGP"].index)
 
-    # team_noc = Team["NOC"]
-
-
-    # team_noc = team_noc.tolist()
-    # team_noc = liste_to_tuple(team_noc)
-    print("yo", type(Team))
-    Team = liste_to_tuple(Team)
+    print("yo", type(liste_equipes))
+    liste_equipes = liste_to_tuple(liste_equipes)
     # Destruction des doublons grâce à un passage par le type set
-    Team = list(set(Team))
-    print("yo", len(Team))
+    liste_equipes = list(set(liste_equipes))
+    print("yo", len(liste_equipes))
 
-    # Possibilité, créer une fonction slicer générique à partir de l'idée suivante :
-    slices_nocs = []
-    slices_nocs.append(NOC[:int(len(NOC)*0.2)])
-    slices_nocs.append(NOC[int(len(NOC)*0.2):int(len(NOC)*0.4)])
-    slices_nocs.append(NOC[int(len(NOC)*0.4):int(len(NOC)*0.6)])
-    slices_nocs.append(NOC[int(len(NOC)*0.6):int(len(NOC)*0.8)])
-    slices_nocs.append(NOC[int(len(NOC)*0.8):])
+    # Remplissage nocs :
+    slices_nocs = slicer(liste_NOC, 0.2)
 
     print("taille slices NOC :", len(slices_nocs))
 
     for i in slices_nocs:
         print(len(i))
         connexion.inserer_nocs_base(i)
-
-    # Possibilité, créer une fonction slicer générique à partir de l'idée suivante :
-    slices_teams = [] 
-    slices_teams.append(Team[:int(len(Team)*0.05)])
-    slices_teams.append(Team[int(len(Team)*0.05):int(len(Team)*0.10)])
-    slices_teams.append(Team[int(len(Team)*0.1):int(len(Team)*0.15)])
-    slices_teams.append(Team[int(len(Team)*0.15):int(len(Team)*0.20)])
-    slices_teams.append(Team[int(len(Team)*0.20):int(len(Team)*0.25)])
-    slices_teams.append(Team[int(len(Team)*0.25):int(len(Team)*0.30)])
-    slices_teams.append(Team[int(len(Team)*0.30):int(len(Team)*0.35)])
-    slices_teams.append(Team[int(len(Team)*0.35):int(len(Team)*0.40)])
-    slices_teams.append(Team[int(len(Team)*0.40):int(len(Team)*0.45)])
-    slices_teams.append(Team[int(len(Team)*0.45):int(len(Team)*0.50)])
-    slices_teams.append(Team[int(len(Team)*0.50):int(len(Team)*0.55)])
-    slices_teams.append(Team[int(len(Team)*0.55):int(len(Team)*0.60)])
-    slices_teams.append(Team[int(len(Team)*0.60):int(len(Team)*0.65)])
-    slices_teams.append(Team[int(len(Team)*0.65):int(len(Team)*0.70)])
-    slices_teams.append(Team[int(len(Team)*0.70):int(len(Team)*0.75)])
-    slices_teams.append(Team[int(len(Team)*0.75):int(len(Team)*0.80)])
-    slices_teams.append(Team[int(len(Team)*0.80):int(len(Team)*0.85)])
-    slices_teams.append(Team[int(len(Team)*0.85):int(len(Team)*0.90)])
-    slices_teams.append(Team[int(len(Team)*0.90):int(len(Team)*0.95)])
-    slices_teams.append(Team[int(len(Team)*0.95):])
-
+    
+    # Remplissage table équipes :
+    slices_teams = slicer(liste_equipes, 0.2)
     print("taille slices team :", len(slices_teams))
-
-    # def decoupeur_liste (liste, pourcentage):
-    #     """Cette fonction découpe une liste en liste de listes dont
-    #     la taille corresponda à un pourcentage donné de celle de la
-    #     liste en paramètre"""
-    #     for i in range(1/pourcentage):
 
     for i in slices_teams :
         connexion.inserer_equipes_base(i)
+
+
+    # Remplissage table athletes :
+    liste_athletes = df[["ID","Name","Sex"]]
+    liste_athletes = liste_to_tuple(liste_athletes)
+    liste_athletes = list(set(liste_athletes))
+
+    slices_athletes = slicer(liste_athletes, 0.2)
+    
+    for i in slices_athletes :
+        connexion.inserer_athletes_base(i)
+
+    # Remplissage table jeux :
+    liste_jeux = df[["Games","Year", "Season", "City"]]
+    liste_jeux = liste_to_tuple(liste_jeux)
+    liste_jeux = list(set(liste_jeux))
+    
+    slices_jeux = slicer(liste_jeux, 0.2)
+    
+    for i in slices_jeux :
+        connexion.inserer_jeux_base(i)
+    
+
 
 main()
