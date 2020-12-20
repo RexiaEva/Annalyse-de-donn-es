@@ -77,139 +77,139 @@ def main():
     # INJECTIONS  #
     ###############
 
-    # # Remplissage table nocs :
+    # Remplissage table nocs :
 
-    # liste_NOC = df2[["NOC", "region", "notes"]]
-    # liste_NOC = liste_NOC.fillna("nan")
+    liste_NOC = df2[["NOC", "region", "notes"]]
+    liste_NOC = liste_NOC.fillna("nan")
 
-    # liste_NOC = liste_to_tuple(liste_NOC)
-    # liste_NOC = list(set(liste_NOC))
+    liste_NOC = liste_to_tuple(liste_NOC)
+    liste_NOC = list(set(liste_NOC))
 
-    # # ajout d'un NOC qui manquait pour Singapour :
-    # liste_NOC.append(("SGP", "Singapore", "nan"))
+    # ajout d'un NOC qui manquait pour Singapour :
+    liste_NOC.append(("SGP", "Singapore", "nan"))
     
-    # liste_NOC = slicer(liste_NOC, 0.5)
+    liste_NOC = slicer(liste_NOC, 0.5)
 
-    # for i in liste_NOC:
-    #     connexion.injecter_nocs(i)
+    for i in liste_NOC:
+        connexion.injecter_nocs(i)
     
-    # # Remplissage table équipes :
+    # Remplissage table équipes :
 
-    # liste_equipes = df[["Team","NOC"]]
+    liste_equipes = df[["Team","NOC"]]
 
-    # liste_equipes = liste_to_tuple(liste_equipes)
-    # liste_equipes = list(set(liste_equipes))
+    liste_equipes = liste_to_tuple(liste_equipes)
+    liste_equipes = list(set(liste_equipes))
 
-    # liste_equipes = slicer(liste_equipes, 0.2)
+    liste_equipes = slicer(liste_equipes, 0.2)
 
-    # for i in liste_equipes :
-    #     connexion.injecter_equipes(i)
+    for i in liste_equipes :
+        connexion.injecter_equipes(i)
 
 
-    # # Remplissage table athletes :
-    # liste_athletes = df[["ID","Name","Sex"]]
-    # liste_athletes = liste_to_tuple(liste_athletes)
-    # liste_athletes = list(set(liste_athletes))
+    # Remplissage table athletes :
+    liste_athletes = df[["ID","Name","Sex"]]
+    liste_athletes = liste_to_tuple(liste_athletes)
+    liste_athletes = list(set(liste_athletes))
 
-    # liste_athletes = slicer(liste_athletes, 0.2)
+    liste_athletes = slicer(liste_athletes, 0.2)
     
-    # for i in liste_athletes :
-    #     connexion.injecter_athletes(i)
+    for i in liste_athletes :
+        connexion.injecter_athletes(i)
 
-    # # Remplissage table jeux :
-    # liste_jeux = df[["Games", "Year", "Season"]]
+    # Remplissage table jeux :
+    liste_jeux = df[["Games", "Year", "Season"]]
 
-    # liste_jeux = liste_to_tuple(liste_jeux)
-    # liste_jeux = list(set(liste_jeux))
+    liste_jeux = liste_to_tuple(liste_jeux)
+    liste_jeux = list(set(liste_jeux))
     
-    # liste_jeux = slicer(liste_jeux, 0.2)
-    # for i in liste_jeux :
-    #     connexion.injecter_jeux(i)
+    liste_jeux = slicer(liste_jeux, 0.2)
+    for i in liste_jeux :
+        connexion.injecter_jeux(i)
 
-    # # Remplissage table sports :
-    # liste_sports = df[["Sport"]]
+    # Remplissage table sports :
+    liste_sports = df[["Sport"]]
 
-    # liste_sports = liste_to_tuple(liste_sports)
-    # liste_sports = list(set(liste_sports))
+    liste_sports = liste_to_tuple(liste_sports)
+    liste_sports = list(set(liste_sports))
     
-    # liste_sports = slicer(liste_sports, 0.2)
-    # for i in liste_sports :
-    #     connexion.injecter_sports(i)
+    liste_sports = slicer(liste_sports, 0.2)
+    for i in liste_sports :
+        connexion.injecter_sports(i)
 
 
-    # # Remplissage table epreuves :
-    # liste_epreuves = df[["Event", "Sport"]]
+    # Remplissage table epreuves :
+    liste_epreuves = df[["Event", "Sport"]]
 
-    # liste_epreuves = liste_to_tuple(liste_epreuves)
-    # liste_epreuves = list(set(liste_epreuves))
+    liste_epreuves = liste_to_tuple(liste_epreuves)
+    liste_epreuves = list(set(liste_epreuves))
     
-    # liste_epreuves = slicer(liste_epreuves, 0.2)
-    # for i in liste_epreuves :
-    #     connexion.injecter_epreuves(i)
+    liste_epreuves = slicer(liste_epreuves, 0.2)
+    for i in liste_epreuves :
+        connexion.injecter_epreuves(i)
 
 
-    # # Remplissage table intermédiaire epreuves_jeux :
-    # liste_epreuves_jeux = df[["Event", "Games", "Year", "Season"]]
+    # Remplissage table intermédiaire epreuves_jeux :
+    liste_epreuves_jeux = df[["Event", "Games", "Year", "Season"]]
 
-    # liste_epreuves_jeux = liste_to_tuple(liste_epreuves_jeux)
-    # liste_epreuves_jeux = list(set(liste_epreuves_jeux))
+    liste_epreuves_jeux = liste_to_tuple(liste_epreuves_jeux)
+    liste_epreuves_jeux = list(set(liste_epreuves_jeux))
     
-    # liste_epreuves_jeux = slicer(liste_epreuves_jeux, 0.2)
-    # for i in liste_epreuves_jeux :
-    #     connexion.injecter_epreuves_jeux(i)
+    liste_epreuves_jeux = slicer(liste_epreuves_jeux, 0.2)
+    for i in liste_epreuves_jeux :
+        connexion.injecter_epreuves_jeux(i)
 
-    # # Remplissage table villes :
-    # liste_villes = df[["City"]]
+    # Remplissage table villes :
+    liste_villes = df[["City"]]
 
-    # liste_villes = liste_to_tuple(liste_villes)
-    # liste_villes = list(set(liste_villes))
+    liste_villes = liste_to_tuple(liste_villes)
+    liste_villes = list(set(liste_villes))
     
-    # liste_villes = slicer(liste_villes, 0.01)
-    # for i in liste_villes :
-    #     connexion.injecter_villes(i)
+    liste_villes = slicer(liste_villes, 0.01)
+    for i in liste_villes :
+        connexion.injecter_villes(i)
 
-    # # Remplissage table jeux_villes :
-    # liste_jeux_villes = df[["Games", "Year", "Season", "City"]]
-    # liste_jeux_villes = liste_to_tuple(liste_jeux_villes)
-    # liste_jeux_villes = list(set(liste_jeux_villes))
+    # Remplissage table jeux_villes :
+    liste_jeux_villes = df[["Games", "Year", "Season", "City"]]
+    liste_jeux_villes = liste_to_tuple(liste_jeux_villes)
+    liste_jeux_villes = list(set(liste_jeux_villes))
     
 
-    # liste_jeux_villes = slicer(liste_jeux_villes, 0.01)
-    # for i in liste_jeux_villes :
-    #     connexion.injecter_jeux_villes(i)
+    liste_jeux_villes = slicer(liste_jeux_villes, 0.01)
+    for i in liste_jeux_villes :
+        connexion.injecter_jeux_villes(i)
 
 
-    # print(df[["ID", "Event", "Medal", "Age", "Weight", "Height"]].isna().sum())
-    # # On remplace les âges manquants par l'âge médian :
-    # df[["Age"]] = df[["Age"]].fillna(df[["Age"]].median())
-    # # On remplace les poids manquants par les poids médians :
-    # df[["Weight"]] = df[["Weight"]].fillna(df[["Weight"]].median())
-    # # On remplace les tailles manquantes par les tailles médianes :
-    # df[["Height"]] = df[["Height"]].fillna(df[["Height"]].median())
-    # # On remplace les médailles manquantes par la mension "aucune" :
-    # df[["Medal"]] = df[["Medal"]].fillna("aucune")
-    # print(df[["ID", "Event", "Medal", "Age", "Weight", "Height"]].isna().sum())
+    print(df[["ID", "Event", "Medal", "Age", "Weight", "Height"]].isna().sum())
+    # On remplace les âges manquants par l'âge médian :
+    df[["Age"]] = df[["Age"]].fillna(df[["Age"]].median())
+    # On remplace les poids manquants par les poids médians :
+    df[["Weight"]] = df[["Weight"]].fillna(df[["Weight"]].median())
+    # On remplace les tailles manquantes par les tailles médianes :
+    df[["Height"]] = df[["Height"]].fillna(df[["Height"]].median())
+    # On remplace les médailles manquantes par la mension "aucune" :
+    df[["Medal"]] = df[["Medal"]].fillna("aucune")
+    print(df[["ID", "Event", "Medal", "Age", "Weight", "Height"]].isna().sum())
 
-    # # Remplissage de la table intermédiaire athletes_epreuves :
-    # liste_ath_epr = df[["ID", "Event", "Medal", "Age", "Weight", "Height"]]
+    # Remplissage de la table intermédiaire athletes_epreuves :
+    liste_ath_epr = df[["ID", "Event", "Medal", "Age", "Weight", "Height"]]
 
-    # liste_ath_epr = liste_to_tuple(liste_ath_epr)
-    # liste_ath_epr = list(set(liste_ath_epr))
+    liste_ath_epr = liste_to_tuple(liste_ath_epr)
+    liste_ath_epr = list(set(liste_ath_epr))
 
-    # liste_ath_epr = slicer(liste_ath_epr, 0.01)
-    # for i in liste_ath_epr :
-    #     connexion.injecter_athletes_epreuves(i)
+    liste_ath_epr = slicer(liste_ath_epr, 0.01)
+    for i in liste_ath_epr :
+        connexion.injecter_athletes_epreuves(i)
 
-    # # Remplissage table intermédiaire equipes_athletes :
-    # liste_equ_ath = df[["ID", "Team", "NOC"]]
-    # print(df[["ID", "Team", "NOC"]].isna().sum())
+    # Remplissage table intermédiaire equipes_athletes :
+    liste_equ_ath = df[["ID", "Team", "NOC"]]
+    print(df[["ID", "Team", "NOC"]].isna().sum())
 
-    # liste_equ_ath = liste_to_tuple(liste_equ_ath)
-    # liste_equ_ath = list(set(liste_equ_ath))
+    liste_equ_ath = liste_to_tuple(liste_equ_ath)
+    liste_equ_ath = list(set(liste_equ_ath))
 
-    # liste_equ_ath = slicer(liste_equ_ath, 0.05)
-    # for i in liste_equ_ath :
-    #     connexion.injecter_equipes_athletes(i)
+    liste_equ_ath = slicer(liste_equ_ath, 0.05)
+    for i in liste_equ_ath :
+        connexion.injecter_equipes_athletes(i)
 
     # Remplissage table intermédiaire equipes_athletes :
     liste_ath_sports = df[["ID", "Sport"]]
