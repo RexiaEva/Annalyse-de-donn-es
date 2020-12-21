@@ -2,10 +2,10 @@
 -- version 4.9.5
 -- https://www.phpmyadmin.net/
 --
--- Hôte : localhost:8081
--- Généré le : Dim 20 déc. 2020 à 16:17
--- Version du serveur :  5.7.24
--- Version de PHP : 7.4.1
+-- Host: localhost:8081
+-- Generation Time: Dec 21, 2020 at 03:07 PM
+-- Server version: 5.7.24
+-- PHP Version: 7.4.1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,13 +19,13 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `jo`
+-- Database: `jo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `athletes`
+-- Table structure for table `athletes`
 --
 
 CREATE TABLE `athletes` (
@@ -37,7 +37,7 @@ CREATE TABLE `athletes` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `athletes_epreuves`
+-- Table structure for table `athletes_epreuves`
 --
 
 CREATE TABLE `athletes_epreuves` (
@@ -52,7 +52,7 @@ CREATE TABLE `athletes_epreuves` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `athletes_sports`
+-- Table structure for table `athletes_sports`
 --
 
 CREATE TABLE `athletes_sports` (
@@ -63,7 +63,7 @@ CREATE TABLE `athletes_sports` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `epreuves`
+-- Table structure for table `epreuves`
 --
 
 CREATE TABLE `epreuves` (
@@ -75,7 +75,7 @@ CREATE TABLE `epreuves` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `epreuves_jeux`
+-- Table structure for table `epreuves_jeux`
 --
 
 CREATE TABLE `epreuves_jeux` (
@@ -86,7 +86,7 @@ CREATE TABLE `epreuves_jeux` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `equipes`
+-- Table structure for table `equipes`
 --
 
 CREATE TABLE `equipes` (
@@ -98,7 +98,7 @@ CREATE TABLE `equipes` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `equipes_athletes`
+-- Table structure for table `equipes_athletes`
 --
 
 CREATE TABLE `equipes_athletes` (
@@ -109,7 +109,7 @@ CREATE TABLE `equipes_athletes` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `jeux`
+-- Table structure for table `jeux`
 --
 
 CREATE TABLE `jeux` (
@@ -122,7 +122,7 @@ CREATE TABLE `jeux` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `jeux_villes`
+-- Table structure for table `jeux_villes`
 --
 
 CREATE TABLE `jeux_villes` (
@@ -133,7 +133,7 @@ CREATE TABLE `jeux_villes` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `nocs`
+-- Table structure for table `nocs`
 --
 
 CREATE TABLE `nocs` (
@@ -146,7 +146,7 @@ CREATE TABLE `nocs` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `sports`
+-- Table structure for table `sports`
 --
 
 CREATE TABLE `sports` (
@@ -157,7 +157,7 @@ CREATE TABLE `sports` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `villes`
+-- Table structure for table `villes`
 --
 
 CREATE TABLE `villes` (
@@ -166,163 +166,184 @@ CREATE TABLE `villes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Index pour les tables déchargées
+-- Indexes for dumped tables
 --
 
 --
--- Index pour la table `athletes`
+-- Indexes for table `athletes`
 --
 ALTER TABLE `athletes`
   ADD PRIMARY KEY (`id_athlete`);
 
 --
--- Index pour la table `athletes_epreuves`
+-- Indexes for table `athletes_epreuves`
 --
 ALTER TABLE `athletes_epreuves`
   ADD KEY `id_athlete` (`id_athlete`),
   ADD KEY `id_epreuve` (`id_epreuve`);
 
 --
--- Index pour la table `athletes_sports`
+-- Indexes for table `athletes_sports`
 --
 ALTER TABLE `athletes_sports`
   ADD KEY `id_sport` (`id_sport`),
   ADD KEY `id_athlete` (`id_athlete`);
 
 --
--- Index pour la table `epreuves`
+-- Indexes for table `epreuves`
 --
 ALTER TABLE `epreuves`
   ADD PRIMARY KEY (`id_epreuve`),
   ADD KEY `id_sport` (`id_sport`);
 
 --
--- Index pour la table `epreuves_jeux`
+-- Indexes for table `epreuves_jeux`
 --
 ALTER TABLE `epreuves_jeux`
   ADD KEY `id_epreuve` (`id_epreuve`),
   ADD KEY `id_jeu` (`id_jeu`);
 
 --
--- Index pour la table `equipes`
+-- Indexes for table `equipes`
 --
 ALTER TABLE `equipes`
-  ADD PRIMARY KEY (`id_equipe`);
+  ADD PRIMARY KEY (`id_equipe`),
+  ADD KEY `id_noc` (`id_noc`);
 
 --
--- Index pour la table `equipes_athletes`
+-- Indexes for table `equipes_athletes`
 --
 ALTER TABLE `equipes_athletes`
   ADD KEY `id_equipe` (`id_equipe`),
   ADD KEY `id_athlete` (`id_athlete`);
 
 --
--- Index pour la table `jeux`
+-- Indexes for table `jeux`
 --
 ALTER TABLE `jeux`
   ADD PRIMARY KEY (`id_jeu`);
 
 --
--- Index pour la table `nocs`
+-- Indexes for table `jeux_villes`
+--
+ALTER TABLE `jeux_villes`
+  ADD KEY `id_jeu` (`id_jeu`),
+  ADD KEY `id_ville` (`id_ville`);
+
+--
+-- Indexes for table `nocs`
 --
 ALTER TABLE `nocs`
   ADD PRIMARY KEY (`id_noc`);
 
 --
--- Index pour la table `sports`
+-- Indexes for table `sports`
 --
 ALTER TABLE `sports`
   ADD PRIMARY KEY (`id_sport`);
 
 --
--- Index pour la table `villes`
+-- Indexes for table `villes`
 --
 ALTER TABLE `villes`
   ADD PRIMARY KEY (`id_ville`);
 
 --
--- AUTO_INCREMENT pour les tables déchargées
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT pour la table `athletes`
+-- AUTO_INCREMENT for table `athletes`
 --
 ALTER TABLE `athletes`
   MODIFY `id_athlete` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `epreuves`
+-- AUTO_INCREMENT for table `epreuves`
 --
 ALTER TABLE `epreuves`
   MODIFY `id_epreuve` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `equipes`
+-- AUTO_INCREMENT for table `equipes`
 --
 ALTER TABLE `equipes`
   MODIFY `id_equipe` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `jeux`
+-- AUTO_INCREMENT for table `jeux`
 --
 ALTER TABLE `jeux`
   MODIFY `id_jeu` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `nocs`
+-- AUTO_INCREMENT for table `nocs`
 --
 ALTER TABLE `nocs`
   MODIFY `id_noc` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `sports`
+-- AUTO_INCREMENT for table `sports`
 --
 ALTER TABLE `sports`
   MODIFY `id_sport` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT pour la table `villes`
+-- AUTO_INCREMENT for table `villes`
 --
 ALTER TABLE `villes`
   MODIFY `id_ville` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- Contraintes pour les tables déchargées
+-- Constraints for dumped tables
 --
 
 --
--- Contraintes pour la table `athletes_epreuves`
+-- Constraints for table `athletes_epreuves`
 --
 ALTER TABLE `athletes_epreuves`
   ADD CONSTRAINT `athletes_epreuves_ibfk_1` FOREIGN KEY (`id_athlete`) REFERENCES `athletes` (`id_athlete`),
   ADD CONSTRAINT `athletes_epreuves_ibfk_2` FOREIGN KEY (`id_epreuve`) REFERENCES `epreuves` (`id_epreuve`);
 
 --
--- Contraintes pour la table `athletes_sports`
+-- Constraints for table `athletes_sports`
 --
 ALTER TABLE `athletes_sports`
   ADD CONSTRAINT `athletes_sports_ibfk_1` FOREIGN KEY (`id_sport`) REFERENCES `sports` (`id_sport`),
   ADD CONSTRAINT `athletes_sports_ibfk_2` FOREIGN KEY (`id_athlete`) REFERENCES `athletes` (`id_athlete`);
 
 --
--- Contraintes pour la table `epreuves`
+-- Constraints for table `epreuves`
 --
 ALTER TABLE `epreuves`
   ADD CONSTRAINT `epreuves_ibfk_2` FOREIGN KEY (`id_sport`) REFERENCES `sports` (`id_sport`);
 
 --
--- Contraintes pour la table `epreuves_jeux`
+-- Constraints for table `epreuves_jeux`
 --
 ALTER TABLE `epreuves_jeux`
   ADD CONSTRAINT `epreuves_jeux_ibfk_1` FOREIGN KEY (`id_epreuve`) REFERENCES `epreuves` (`id_epreuve`),
   ADD CONSTRAINT `epreuves_jeux_ibfk_2` FOREIGN KEY (`id_jeu`) REFERENCES `jeux` (`id_jeu`);
 
 --
--- Contraintes pour la table `equipes_athletes`
+-- Constraints for table `equipes`
+--
+ALTER TABLE `equipes`
+  ADD CONSTRAINT `equipes_ibfk_1` FOREIGN KEY (`id_noc`) REFERENCES `nocs` (`id_noc`);
+
+--
+-- Constraints for table `equipes_athletes`
 --
 ALTER TABLE `equipes_athletes`
   ADD CONSTRAINT `equipes_athletes_ibfk_1` FOREIGN KEY (`id_equipe`) REFERENCES `equipes` (`id_equipe`),
   ADD CONSTRAINT `equipes_athletes_ibfk_2` FOREIGN KEY (`id_athlete`) REFERENCES `athletes` (`id_athlete`);
+
+--
+-- Constraints for table `jeux_villes`
+--
+ALTER TABLE `jeux_villes`
+  ADD CONSTRAINT `jeux_villes_ibfk_1` FOREIGN KEY (`id_jeu`) REFERENCES `jeux` (`id_jeu`),
+  ADD CONSTRAINT `jeux_villes_ibfk_2` FOREIGN KEY (`id_ville`) REFERENCES `villes` (`id_ville`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
